@@ -2,7 +2,7 @@ package flc.cisp400.robotevolution;
 
 /**
  *
- * @author ianda
+ * @author ianWallace, 2022
  */
 
 import javafx.fxml.FXML;
