@@ -3,7 +3,9 @@
  * @author ianWallace, 2022
  */
 package flc.cisp400.robotevolution;
+
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 public class Map {
     // 'b' for battery space, 'o' for empty space
@@ -16,19 +18,16 @@ public class Map {
         int space;
         int counter = 0;
 
-        // Create Battery Array
-        for (int i = 0; i < SIZE; i++) {
-                batteryArray[i] = 'o';
-        }
+        Arrays.fill(batteryArray, 'o');
 
         // Place 40 batteries randomly
         do {
-                space = randomInt.nextInt(100);
+            space = randomInt.nextInt(100);
 
-                if (batteryArray[space] == 'o') {
-                        batteryArray[space] = 'b';
-                        counter++;
-                }
+            if (batteryArray[space] == 'o') {
+                    batteryArray[space] = 'b';
+                    counter++;
+            }
 
         } while (counter < MAX_BATTERIES);
     }

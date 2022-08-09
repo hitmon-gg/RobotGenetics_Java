@@ -11,8 +11,8 @@ public class RobotData {
 
     //public RobotData() {accumulator = 0;}
     public void resetAccumulator() {accumulator = 0;}
-    public void setFitnessScore() {fitnessScore.add(accumulator);}    
-    public void setAccumulator(int accumulator) {this.accumulator += accumulator;}    
+    public void setFitnessScore() {fitnessScore.add(accumulator);}
+    public void setAccumulator(int turns) {accumulator += turns;}
     public int  getRobotFitness(int i) {return fitnessScore.get(i);}   
     public int  getArraySize() {return fitnessScore.size();}
 }
