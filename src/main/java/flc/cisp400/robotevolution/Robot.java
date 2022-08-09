@@ -3,7 +3,7 @@
  * @author ianWallace, 2022
  */
 package flc.cisp400.robotevolution;
-import java.util.Comparator;
+
 import java.security.SecureRandom;
 
 public class Robot {
@@ -74,6 +74,9 @@ public class Robot {
     public int getBattery()  {return battery;}
     public int getTurns()    {return turns;}
 
+
+    private void addPower() {this.battery += 5;}
+
     // Robot map traversing sensors
     private void senseArea(Map mapObj) {
         // Check for walls, true = 1
@@ -128,7 +131,7 @@ public class Robot {
         // check genes
         for (int i = 0; i < numOfGenes; i++) {
             geneMatch = 0;
-            
+
             for (int j = 0; j < (numOfProteins - 1); j++) {
                 if (genes[i].proteins[j] == sensor[j] || genes[i].proteins[j] == 3) // 3 don't care
                     geneMatch++;
@@ -175,11 +178,9 @@ public class Robot {
         if (mapObj.batteryArray(position) != 'b')
             battery--;
         
-        else
+        else {
             mapObj.removeBattery(position);
+            addPower();
+        }
     }
-
-    // Sort Robot Array in Reverse (descending) order
-    public static Comparator<Robot> TurnsComparator = 
-            (Robot r1, Robot r2) -> r2.getTurns() - r1.getTurns();
 }

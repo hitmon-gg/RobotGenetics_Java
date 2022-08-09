@@ -9,7 +9,6 @@ public class Map {
     // 'b' for battery space, 'o' for empty space
     private final char[] batteryArray = new char[100];  
 
-
     public Map() {
         final SecureRandom randomInt = new SecureRandom();
         final int SIZE = 100;
