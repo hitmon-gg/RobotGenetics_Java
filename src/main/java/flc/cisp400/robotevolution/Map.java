@@ -4,16 +4,16 @@
  */
 package flc.cisp400.robotevolution;
 
-import java.security.SecureRandom;
+import java.util.Random;
 import java.util.Arrays;
 
 public class Map {
+    final int MAP_SIZE = 100;
     // 'b' for battery space, 'o' for empty space
-    private final char[] batteryArray = new char[100];  
+    private final char[] batteryArray = new char[MAP_SIZE];
 
     public Map() {
-        final SecureRandom randomInt = new SecureRandom();
-        final int SIZE = 100;
+        final Random randomInt = new Random();
         final int MAX_BATTERIES = 40;
         int space;
         int counter = 0;

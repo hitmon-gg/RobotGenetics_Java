@@ -9,7 +9,6 @@ public class RobotData {
     private int accumulator;
     private final ArrayList<Integer> fitnessScore = new ArrayList<>();
 
-    //public RobotData() {accumulator = 0;}
     public void resetAccumulator() {accumulator = 0;}
     public void setFitnessScore() {fitnessScore.add(accumulator);}
     public void setAccumulator(int turns) {accumulator += turns;}

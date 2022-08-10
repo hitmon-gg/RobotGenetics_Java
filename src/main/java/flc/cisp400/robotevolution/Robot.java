@@ -4,10 +4,11 @@
  */
 package flc.cisp400.robotevolution;
 
-import java.security.SecureRandom;
+import java.util.Random;
+import java.util.Arrays;
 
 public class Robot {
-    SecureRandom randomInt = new SecureRandom();
+    Random randomInt = new Random();
     private final int numOfGenes = 16;
     private final int numOfProteins = 5;
     private int position;
@@ -66,22 +67,22 @@ public class Robot {
     }
     
     // Setters
-    public void setBattery (int battery) {this.battery = battery;}
-    public void setTurns   (int turns)   {this.turns = turns;}
-    public void setPosition(int position){this.position = position;}
+    public void resetBattery()  {battery = 5;}
+    public void resetTurns()    {turns = 0;}
+    public void resetPosition() {position = randomInt.nextInt(100);}
+
+    private void addPower() {battery += 5;} // When Robot finds a battery
     
     // Getters
     public int getBattery()  {return battery;}
     public int getTurns()    {return turns;}
 
 
-    private void addPower() {this.battery += 5;}
-
     // Robot map traversing sensors
     private void senseArea(Map mapObj) {
         // Check for walls, true = 1
         // Check for batteries, true = 2;
-        
+
         // North
         if (position - 10 < 0) {
             sensor[0] = 1;
@@ -125,10 +126,10 @@ public class Robot {
         int newPosition = position;
         int direction = 0;
         
-        turns++;
-        senseArea(mapObj);
+        turns++; // Increment every move
+        senseArea(mapObj); // Determine robot surroundings
         
-        // check genes
+        // check genes for match with surroundings to determine direction to move
         for (int i = 0; i < numOfGenes; i++) {
             geneMatch = 0;
 
@@ -146,24 +147,28 @@ public class Robot {
                 direction = genes[15].proteins[4];
             }
         }
+
+        if (direction == 4) {
+            direction = randomInt.nextInt(4);
+        }
         
         switch (direction) {
-            case 0:
+            case 0: // N
                 if (sensor[0] != 1)
                     newPosition = position - 10;
                 break;
 
-            case 1:
+            case 1: // S
                 if (sensor[1] != 1)
                     newPosition = position + 10;
                 break;
 
-            case 2:
+            case 2: // E
                 if (sensor[2] != 1)
                     newPosition = position + 1;
                 break;
 
-            case 3:
+            case 3: // W
                 if (sensor[3] != 1)
                     newPosition = position - 1;
                 break;
@@ -175,8 +180,9 @@ public class Robot {
 
         position = newPosition;
         
-        if (mapObj.batteryArray(position) != 'b')
+        if (mapObj.batteryArray(position) != 'b') {
             battery--;
+        }
         
         else {
             mapObj.removeBattery(position);
